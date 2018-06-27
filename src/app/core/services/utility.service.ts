@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { AuthenService } from './authen.service';
-import { UrlConstants } from '../../common/url.constants';
+import { UrlConstants } from '../common/url.constants';
 
 @Injectable()
 export class UtilityService {

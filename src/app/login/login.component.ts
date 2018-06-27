@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenService } from '../core/services/authen.service';
 import { NotificationService } from '../core/services/notification.service';
-import { UrlConstants } from '../common/url.constants';
-import { MessageContstants } from '../common/message.constants';
+import { UrlConstants } from '../core/common/url.constants';
+import { MessageContstants } from '../core/common/message.constants';
 
 @Component({
   selector: 'app-login',

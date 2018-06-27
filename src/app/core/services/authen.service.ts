@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { SystemConstants } from '../../common/system.constants';
-import { LoggedInUser } from '../../domain/loggedin.user';
+import { SystemConstants } from '../common/system.constants';
+import { LoggedInUser } from '../domain/loggedin.user';
 
 @Injectable()
 export class AuthenService {

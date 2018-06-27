@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggedInUser } from '../domain/loggedin.user';
+import { LoggedInUser } from '../core/domain/loggedin.user';
 import { AuthenService } from '../core/services/authen.service';
 import { UtilityService } from '../core/services/utility.service';
-import { SystemConstants } from '../common/system.constants';
-import { UrlConstants } from '../common/url.constants';
+import { SystemConstants } from '../core/common/system.constants';
+import { UrlConstants } from '../core/common/url.constants';
 
 @Component({
   selector: 'app-main',

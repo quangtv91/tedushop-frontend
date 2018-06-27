@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { AuthenService } from './authen.service';
 import { NotificationService } from './notification.service';
 import { UtilityService } from './utility.service';
-import { SystemConstants } from '../../common/system.constants';
-import { MessageContstants } from '../../common/message.constants';
+import { SystemConstants } from '../common/system.constants';
+import { MessageContstants } from '../common/message.constants';
 
 @Injectable()
 export class DataService {
