@@ -24,8 +24,12 @@
     "animate.css": "^3.6.1",
     "bootstrap": "^4.1.1",
     "core-js": "^2.4.1",
+    "fastclick": "^1.0.6",
     "font-awesome": "^4.7.0",
     "gentelella": "^1.4.0",
+    "jquery": "^3.3.1",
+    "nprogress": "^0.2.0",
+    "popper.js": "^1.14.3",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
