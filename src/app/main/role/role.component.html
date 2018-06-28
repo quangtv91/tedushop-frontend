@@ -23,33 +23,17 @@
       <div class="x_title">
         <ul class="nav navbar-right panel_toolbox">
           <li>
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              <i class="fa fa-wrench"></i>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="#">Settings 1</a>
-              </li>
-              <li>
-                <a href="#">Settings 2</a>
-              </li>
-            </ul>
+            <button type="button" class="btn btn-primary" (click)="showAddEditModal()">Thêm mới</button>
           </li>
           <li>
-            <a class="close-link">
-              <i class="fa fa-close"></i>
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
             </a>
           </li>
         </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -73,13 +57,52 @@
             </tr>
           </tbody>
         </table>
-
         <div class="col-md-12">
-          <pagination [boundaryLinks]="true" [itemsPerPage]="pageSize" [totalItems]="totalRow" [(ngModel)]="pageIndex" previousText="&lsaquo;" nextText="&rsaquo;"
-            firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)">
+          <pagination [boundaryLinks]="true" [itemsPerPage]="pageSize" [totalItems]="totalRow" [(ngModel)]="pageIndex" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)">
           </pagination>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div bsModal #addEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-child-name" class="modal-title pull-left">Thêm/Sửa quyền</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="hideAddEditModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form novalidate #addEditForm="ngForm" (ngSubmit)="saveChange(addEditForm.valid)" *ngIf="entity">
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Tên nhóm</label>
+            <div class="col-sm-10">
+              <input type="hidden" class="form-control" name="id" [(ngModel)]="entity.Id">
+              <input type="text" class="form-control" name="name" [(ngModel)]="entity.Name" #name="ngModel" required minlength="3" placeholder="Tên nhóm">
+              <small class="text-danger" [hidden]="name.valid || (name.pristine && !addEditForm.submitted)">Bạn phải nhập ít nhất 3 ký tự</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Mô tả</label>
+            <div class="col-sm-10">
+              <textarea type="text" class="form-control" name="description" [(ngModel)]="entity.Description" #description="ngModel" required
+                placeholder="Mô tả"></textarea>
+              <small class="text-danger" [hidden]="description.valid || (description.pristine && !addEditForm.submitted)">Bạn phải nhập mô tả</small>
+            </div>
+          </div>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+              <button type="button" (click)="hideAddEditModal()" class="btn btn-secondary">Hủy bỏ</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!addEditForm.form.valid">Cập nhật</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
