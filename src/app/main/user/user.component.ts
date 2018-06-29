@@ -4,6 +4,8 @@ import { DataService } from '../../core/services/data.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { MessageContstants } from '../../core/common/message.constants';
 import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { UploadService } from '../../core/services/upload.service';
+import { SystemConstants } from '../../core/common/system.constants';
 
 declare var moment: any;
 
@@ -14,6 +16,7 @@ declare var moment: any;
 })
 export class UserComponent implements OnInit {
   @ViewChild('addEditModal') addEditModal: ModalDirective;
+  @ViewChild('avatar') avatar;
 
   public pageIndex: Number = 1;
   public pageSize: Number = 20;
@@ -27,6 +30,8 @@ export class UserComponent implements OnInit {
   public allRoles: IMultiSelectOption[] = [];
   public roles: any[];
 
+  public baseFolder: String = SystemConstants.BASE_API;
+
   public dateOptions: any = {
     locale: { format: 'DD/MM/YYYY' },
     alwaysShowCalendars: false,
@@ -36,7 +41,7 @@ export class UserComponent implements OnInit {
   constructor(
     private _dataService: DataService,
     private _notificationService: NotificationService,
-
+    private _uploadService: UploadService
   ) { }
 
   ngOnInit() {
@@ -99,24 +104,38 @@ export class UserComponent implements OnInit {
 
   saveChange(valid: Boolean) {
     if (valid) {
-      if (this.entity.Id === undefined) {
-        this._dataService.post('/api/appUser/add', this.entity).subscribe((res: any) => {
-          this.loadData();
-          this.addEditModal.hide();
-          this._notificationService.printSuccessMessage(MessageContstants.CREATED_OK_MSG);
-        }, err => {
-          this._dataService.handleError(err);
+      this.entity.Roles = this.myRoles;
+      let fileImage = this.avatar.nativeElement;
+      if (fileImage.files.lenght > 0) {
+        this._uploadService.postWithFile('/api/upload/saveImage', null, fileImage.files).then((imageUrl: string) => {
+          this.entity.Avatar = imageUrl;
+        }).then(() => {
+          this.saveData();
         });
       } else {
-        // update
-        this._dataService.put('/api/appUser/update', this.entity).subscribe((res: any) => {
-          this.loadData();
-          this.addEditModal.hide();
-          this._notificationService.printSuccessMessage(MessageContstants.UPDATED_OK_MSG);
-        }, err => {
-          this._dataService.handleError(err);
-        });
+        this.saveData();
       }
+    }
+  }
+
+  saveData() {
+    if (this.entity.Id === undefined) {
+      this._dataService.post('/api/appUser/add', this.entity).subscribe((res: any) => {
+        this.loadData();
+        this.addEditModal.hide();
+        this._notificationService.printSuccessMessage(MessageContstants.CREATED_OK_MSG);
+      }, err => {
+        this._dataService.handleError(err);
+      });
+    } else {
+      // update
+      this._dataService.put('/api/appUser/update', this.entity).subscribe((res: any) => {
+        this.loadData();
+        this.addEditModal.hide();
+        this._notificationService.printSuccessMessage(MessageContstants.UPDATED_OK_MSG);
+      }, err => {
+        this._dataService.handleError(err);
+      });
     }
   }
 

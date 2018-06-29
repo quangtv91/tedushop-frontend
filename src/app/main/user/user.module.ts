@@ -7,6 +7,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DataService } from '../../core/services/data.service';
 import { NotificationService } from '../../core/services/notification.service';
+import { UploadService } from '../../core/services/upload.service';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { Daterangepicker } from 'ng2-daterangepicker';
 
@@ -30,9 +31,9 @@ export const userRoutes: Routes = [
     PaginationModule,
     ModalModule.forRoot(),
     MultiselectDropdownModule,
-    Daterangepicker
+    Daterangepicker,
   ],
   declarations: [UserComponent],
-  providers: [DataService, NotificationService]
+  providers: [DataService, NotificationService, UploadService]
 })
 export class UserModule { }
