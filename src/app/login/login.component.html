@@ -7,13 +7,13 @@
       <section class="login_content">
         <form novalidate name="formLogin" #f="ngForm" (ngSubmit)="f.form.valid && login()">
           <h1>Đăng nhập</h1>
-          <div [ngClass]="{'has-error':f.submitted && !username.valid}">
-            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+          <div [ngClass]="{'has-error':f.submitted && !username.valid}" class="content_input">
+            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Tên đăng nhập"/>
             <div *ngIf="f.submitted && !username.valid" class="help-block text-danger">Tên đăng nhập yêu cầu</div>
           </div>
-          <div [ngClass]="{'has-error':f.submitted && !password.valid}">
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-            <span *ngIf="f.submitted && !password.valid" class="help-block text-danger">Mật khẩu yêu cầu</span>
+          <div [ngClass]="{'has-error':f.submitted && !password.valid}" class="content_input">
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Mật khẩu"/>
+            <div *ngIf="f.submitted && !password.valid" class="help-block text-danger">Mật khẩu yêu cầu</div>
           </div>
           <div>
             <button [disabled]="loading" class="btn btn-default" href="index.html">Đăng nhập</button>

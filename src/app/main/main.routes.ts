@@ -22,6 +22,10 @@ export const mainRoutes: Routes = [
       {
         path: 'role',
         loadChildren: './role/role.module#RoleModule'
+      },
+      {
+        path: 'function',
+        loadChildren: './function/function.module#FunctionModule'
       }
     ]
   }

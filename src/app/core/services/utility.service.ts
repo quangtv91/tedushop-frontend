@@ -29,14 +29,16 @@ export class UtilityService {
   }
 
   Unflatten = (arr: any[]): any[] => {
-    const map = {};
-    const roots: any[] = [];
-    for (let i = 0; i < arr.length; i += 1) {
-      const node = arr[i];
+    let map = {};
+    let roots: any[] = [];
+    for (var i = 0; i < arr.length; i += 1) {
+      let node = arr[i];
       node.children = [];
-      map[node.Id] = i; // use map to look-up the parents
+      map[node.ID] = i; // use map to look-up the parents
       if (node.ParentId !== null) {
-        arr[map[node.ParentId]].children.push(node);
+        if (node.ParentId.children !== undefined) {
+          arr[map[node.ParentId]].children.push(node);
+        }
       } else {
         roots.push(node);
       }

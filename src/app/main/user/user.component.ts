@@ -153,4 +153,8 @@ export class UserComponent implements OnInit {
     this.entity.Gender = event.target.value;
   }
 
+  public selectedDate(value: any, datepicker?: any) {
+    this.entity.BirthDay = moment(value.end._d).format('DD/MM/YYYY');
+  }
+
 }
