@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { MessageContstants } from '../../core/common/message.constants';
+import { SystemConstants } from '../../core/common/system.constants';
+import { AuthenService } from '../../core/services/authen.service';
 import { DataService } from '../../core/services/data.service';
 import { NotificationService } from '../../core/services/notification.service';
-import { MessageContstants } from '../../core/common/message.constants';
-import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 import { UploadService } from '../../core/services/upload.service';
-import { SystemConstants } from '../../core/common/system.constants';
+import { UtilityService } from '../../core/services/utility.service';
 
 declare var moment: any;
 
@@ -41,8 +43,14 @@ export class UserComponent implements OnInit {
   constructor(
     private _dataService: DataService,
     private _notificationService: NotificationService,
-    private _uploadService: UploadService
-  ) { }
+    private _uploadService: UploadService,
+    public _authenService: AuthenService,
+    private _utilityService: UtilityService
+  ) {
+    if (_authenService.checkAccess('USER') === false) {
+      _utilityService.navigateToLogin();
+    }
+  }
 
   ngOnInit() {
     this.loadRoles();
@@ -76,6 +84,7 @@ export class UserComponent implements OnInit {
       .subscribe((res: any) => {
         this.entity = res;
         // gan role hien tai cua user
+        this.myRoles = [];
         for (let role of this.entity.Roles) {
           this.myRoles.push(role);
         }
