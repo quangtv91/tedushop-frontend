@@ -40,7 +40,6 @@ export class FunctionComponent implements OnInit {
   public search() {
     this.dataService.get('/api/function/getall?filter=' + this.filter)
       .subscribe((response: any[]) => {
-        console.log(response);
         this._functions = response.filter(x => x.ParentId == null);
         this._functionHierachy = this.utilityService.Unflatten(response);
       }, error => this.dataService.handleError(error));
