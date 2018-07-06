@@ -23,6 +23,7 @@ export class SidebarMenuComponent implements OnInit {
         }
         return 0;
       });
+      // console.log(response);
     }, error => this.dataService.handleError(error));
   }
 }
