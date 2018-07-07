@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~angular-tree-component/dist/angular-tree-component.css';
+/* @import '~angular-tree-component/dist/angular-tree-component.css'; */
+/* @import '../node_modules/angular-tree-component/dist/angular-tree-component.css'; */
 
 /* commom */
 @media (min-width: 576px) {

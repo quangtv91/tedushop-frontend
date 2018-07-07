@@ -54,7 +54,7 @@ export class UtilityService {
       node.children = [];
       map[node.ID] = i; // use map to look-up the parents
       if (node.ParentID !== null) {
-        if (node.ParentId.children !== undefined) {
+        if (node.ParentID.children !== undefined) {
           arr[map[node.ParentID]].children.push(node);
         }
       } else {
