@@ -83,6 +83,7 @@ export class UserComponent implements OnInit {
     this._dataService.get('/api/appUser/detail/' + id)
       .subscribe((res: any) => {
         this.entity = res;
+        console.log(res);
         // gan role hien tai cua user
         this.myRoles = [];
         for (let role of this.entity.Roles) {
@@ -116,7 +117,7 @@ export class UserComponent implements OnInit {
       this.entity.Roles = this.myRoles;
       let fileImage = this.avatar.nativeElement;
       if (fileImage.files.lenght > 0) {
-        this._uploadService.postWithFile('/api/upload/saveImage', null, fileImage.files).then((imageUrl: string) => {
+        this._uploadService.postWithFile('/api/upload/saveImage?type=avatar', null, fileImage.files).then((imageUrl: string) => {
           this.entity.Avatar = imageUrl;
         }).then(() => {
           this.saveData();

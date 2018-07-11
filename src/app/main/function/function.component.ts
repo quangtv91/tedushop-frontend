@@ -42,6 +42,7 @@ export class FunctionComponent implements OnInit {
       .subscribe((response: any[]) => {
         this._functions = response.filter(x => x.ParentId == null);
         this._functionHierachy = this.utilityService.Unflatten(response);
+        console.log(response);
       }, error => this.dataService.handleError(error));
   }
 
